@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: hsl(260, 82%, 60%);
+  --secondary: hsl(150, 70%, 50%);
+  --accent: hsl(38, 92%, 58%);
+  --success: hsl(142, 72%, 36%);
+  --warning: hsl(45, 100%, 50%);
+  --error: hsl(0, 84%, 60%);
+  --background: hsl(210, 20%, 12%);
+  --surface: hsl(210, 15%, 18%);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background);
+  color: white;
+}
+
+* {
+  box-sizing: border-box;
+}
