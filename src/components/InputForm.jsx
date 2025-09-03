@@ -9,12 +9,24 @@ const InputForm = ({
   min, 
   max, 
   help,
+  error,
   className = '' 
 }) => {
   const handleChange = (e) => {
-    const newValue = type === 'number' ? parseInt(e.target.value) || 0 : e.target.value
-    onChange(newValue)
+    let newValue;
+    if (type === 'number') {
+      // Handle empty string for number inputs
+      newValue = e.target.value === '' ? '' : parseInt(e.target.value) || 0;
+    } else {
+      newValue = e.target.value;
+    }
+    onChange(newValue);
   }
+
+  const inputClasses = `w-full px-md py-sm bg-background border rounded-md 
+                   text-white placeholder-gray-500 focus:outline-none focus:ring-2 
+                   focus:ring-primary focus:border-transparent transition-all duration-base
+                   ${error ? 'border-error' : 'border-gray-600 hover:border-gray-500'}`;
 
   return (
     <div className={`space-y-sm ${className}`}>
@@ -31,15 +43,16 @@ const InputForm = ({
         placeholder={placeholder}
         min={min}
         max={max}
-        className="w-full px-md py-sm bg-background border border-gray-600 rounded-md 
-                   text-white placeholder-gray-500 focus:outline-none focus:ring-2 
-                   focus:ring-primary focus:border-transparent transition-all duration-base
-                   hover:border-gray-500"
+        className={inputClasses}
+        aria-invalid={error ? 'true' : 'false'}
+        aria-describedby={error ? `${label}-error` : help ? `${label}-help` : undefined}
       />
       
-      {help && (
-        <p className="text-xs text-gray-500">{help}</p>
-      )}
+      {error ? (
+        <p id={`${label}-error`} className="text-xs text-error">{error}</p>
+      ) : help ? (
+        <p id={`${label}-help`} className="text-xs text-gray-500">{help}</p>
+      ) : null}
     </div>
   )
 }
