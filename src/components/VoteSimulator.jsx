@@ -451,6 +451,7 @@ const VoteSimulator = () => {
         )}
       </div>
     </div>
+  </div>
   )
 }
 
